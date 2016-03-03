@@ -1,8 +1,8 @@
 object Form_Main: TForm_Main
-  Left = 244
-  Top = 191
-  Width = 870
-  Height = 640
+  Left = 291
+  Top = 148
+  Width = 937
+  Height = 680
   Caption = 'Wydruk formularzy ZUS-3'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -12,15 +12,16 @@ object Form_Main: TForm_Main
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object ToolBar_main: TToolBar
     Left = 0
     Top = 0
-    Width = 862
+    Width = 929
     Height = 49
     ButtonHeight = 21
-    ButtonWidth = 41
+    ButtonWidth = 47
     Caption = 'ToolBar_main'
     ShowCaptions = True
     TabOrder = 0
@@ -37,31 +38,55 @@ object Form_Main: TForm_Main
       ImageIndex = 1
     end
     object ToolButton_Edytuj: TToolButton
-      Left = 80
+      Left = 86
       Top = 2
       Caption = 'Edytuj'
       ImageIndex = 2
     end
     object ToolButton_Pliki: TToolButton
-      Left = 121
+      Left = 133
       Top = 2
       Caption = 'Pliki'
       ImageIndex = 3
     end
+    object ToolButton_Odswiez: TToolButton
+      Left = 180
+      Top = 2
+      Caption = 'Odswie'#380
+      ImageIndex = 4
+      OnClick = ToolButton_OdswiezClick
+    end
   end
-  object ListView1: TListView
+  object ListViewMain: TListView
     Left = 0
     Top = 49
-    Width = 862
-    Height = 545
+    Width = 929
+    Height = 585
     Align = alClient
-    Columns = <>
+    Columns = <
+      item
+        Caption = 'Imi'#281
+        Width = 100
+      end
+      item
+        Caption = 'Nazwisko'
+        Width = 250
+      end
+      item
+        Caption = 'Pesel'
+        Width = 100
+      end>
+    GridLines = True
+    HideSelection = False
+    ReadOnly = True
+    RowSelect = True
     TabOrder = 1
+    ViewStyle = vsReport
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 594
-    Width = 862
+    Top = 634
+    Width = 929
     Height = 19
     Panels = <>
   end
@@ -72,10 +97,5 @@ object Form_Main: TForm_Main
       Caption = '&Dodaj'
       OnExecute = Action_DodajExecute
     end
-  end
-  object ADOConnection1: TADOConnection
-    Provider = 'PostgreSQL OLE DB Provider'
-    Left = 352
-    Top = 192
   end
 end
