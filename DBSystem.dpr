@@ -19,8 +19,7 @@ begin
   GKomunikat:= TKomunikat.Create;
   if GDataBase.StartDataBase('') then begin
     Application.CreateForm(TForm_Main, Form_Main);
-  Application.CreateForm(TForm_Settings, Form_Settings);
-  Application.Run;
+    Application.Run;
   end;
   GDataBase.Free;
   GKomunikat.Free;
