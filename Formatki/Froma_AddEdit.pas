@@ -110,6 +110,7 @@ const
   cTypDokDowodosobisty = 0;
   cTypDokumentuInny = 1;
 
+
 resourcestring
 
   cTypDokumentuDowodStr = 'Dowód osobisty';
