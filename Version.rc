@@ -1,0 +1,26 @@
+1 VERSIONINFO
+FILEVERSION 2011, 06, 16,
+PRODUCTVERSION 1, 1, 1, 1
+FILEFLAGSMASK VS_FFI_FILEFLAGSMASK
+FILEOS VOS__WINDOWS32
+FILETYPE VFT_APP
+{
+ BLOCK "StringFileInfo"
+ {
+  BLOCK "041504E2"
+  {
+   VALUE "Comments", "\000"
+   VALUE "CompanyName", "Piotr Peretko\000"
+   VALUE "FileDescription", "DBSYSTEM"
+   VALUE "FileVersion", "1.01.001.001\000"
+   VALUE "InternalName", "DBSYSTEM\000"
+   VALUE "OriginalFilename", "\000"
+   VALUE "ProductName", "DBSYSTEM\000"
+   VALUE "ProductVersion", "1.01.001\000"
+  }
+ }
+ BLOCK "VarFileInfo"
+ {
+  VALUE "Translation", 1045, 1250
+ }
+}
