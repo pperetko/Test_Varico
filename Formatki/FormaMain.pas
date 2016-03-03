@@ -16,11 +16,13 @@ type
     ListViewMain: TListView;
     StatusBar1: TStatusBar;
     ActionList1: TActionList;
-    Action_Dodaj: TAction;
     ToolButton_Odswiez: TToolButton;
+    Action_Edytuj: TAction;
     procedure Action_DodajExecute(Sender: TObject);
     procedure ToolButton_OdswiezClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure Action_EdytujExecute(Sender: TObject);
+    procedure Action_EdytujUpdate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,7 +40,7 @@ uses Froma_AddEdit, Zmienne, stale, DataBase, funkcje;
 procedure TForm_Main.Action_DodajExecute(Sender: TObject);
 begin
   if TFormularzZus3.Pokaz(CKeyNill) then begin
-
+    OdswiezListe;
   end;
 end;
 
@@ -72,7 +74,6 @@ begin
 end;
 
 procedure TForm_Main.FormDestroy(Sender: TObject);
-
 begin
   WyczyscListe();
 end;
@@ -92,6 +93,27 @@ begin
     end;
   end;
   ListViewMain.Clear;
+end;
+
+procedure TForm_Main.Action_EdytujExecute(Sender: TObject);
+var
+  xItem: TListItem;
+  xObject: Tid;
+begin
+  if ListViewMain.ItemIndex <> -1 then begin
+    xItem := ListViewMain.ItemFocused;
+    xObject := Tid(xItem.SubItems.Objects[1]);
+    if Assigned(xObject) then begin
+      if TFormularzZus3.Pokaz(xObject.Fid) then begin
+        OdswiezListe;
+      end;
+    end;
+  end;
+end;
+
+procedure TForm_Main.Action_EdytujUpdate(Sender: TObject);
+begin
+  ToolButton_Edytuj.Enabled := ListViewMain.ItemIndex <> -1;
 end;
 
 end.

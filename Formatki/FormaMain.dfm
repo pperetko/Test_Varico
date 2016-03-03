@@ -28,8 +28,9 @@ object Form_Main: TForm_Main
     object ToolButton_Dodaj: TToolButton
       Left = 0
       Top = 2
-      Action = Action_Dodaj
       AutoSize = True
+      Caption = '&Dodaj'
+      OnClick = Action_DodajExecute
     end
     object ToolButton_Usun: TToolButton
       Left = 39
@@ -40,8 +41,7 @@ object Form_Main: TForm_Main
     object ToolButton_Edytuj: TToolButton
       Left = 86
       Top = 2
-      Caption = 'Edytuj'
-      ImageIndex = 2
+      Action = Action_Edytuj
     end
     object ToolButton_Pliki: TToolButton
       Left = 133
@@ -93,9 +93,10 @@ object Form_Main: TForm_Main
   object ActionList1: TActionList
     Left = 672
     Top = 16
-    object Action_Dodaj: TAction
-      Caption = '&Dodaj'
-      OnExecute = Action_DodajExecute
+    object Action_Edytuj: TAction
+      Caption = '&Edytuj'
+      OnExecute = Action_EdytujExecute
+      OnUpdate = Action_EdytujUpdate
     end
   end
 end
