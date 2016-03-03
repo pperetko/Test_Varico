@@ -107,9 +107,8 @@ implementation
 uses Stale, DataBase, funkcje, DB;
 
 const
-  cTypDokDowodosobisty = 0;
-  cTypDokumentuInny = 1;
-
+  cTypDokDowodosobisty = 1;
+  cTypDokumentuInny = 2;
 
 resourcestring
 
@@ -325,9 +324,11 @@ begin
       xResultHandle.Clear;
 
       xKluczPracownik := GdataBase.MaxId('Pracownik');
-      xRodzajDok := 0;
+
       if ComboBox_PRodzajDokumentu.Text = cTypDokumentuDowodStr then begin
         xRodzajDok := cTypDokDowodosobisty;
+      end else begin
+        xRodzajDok := cTypDokumentuInny;
       end;
       xZapytanie := format('Insert into public.Pracownik( idpracownik, rodzajdokumentu, serianumerdokumentu, ' +
         ' nazwisko, imie, dataurodzenia ) values(%s, %s,''%s'',''%s'',''%s'',''%s'')',
@@ -342,9 +343,11 @@ begin
       xResultHandle.Clear;
 
       xidPlatnik := GdataBase.MaxId('Platnik');
-      xRodzajDok := 0;
+
       if ComboBox_RodzajDokumentu.Text = cTypDokumentuDowodStr then begin
         xRodzajDok := cTypDokDowodosobisty;
+      end else begin
+        xRodzajDok := cTypDokumentuInny;
       end;
       xZapytanie := format('Insert into public.Platnik(idPlatnik, nip,regon, pesel, rodzajdokumentu,' +
         ' serianumerdok, nazwaskrocona, nazwisko, imie, idadressiedziby, idpracownik  ) values' +
@@ -379,52 +382,78 @@ var
 begin
   with FFormatka do begin
     if SprawdzWprowadzoneDane then begin
-      xZapytanie := format('Update public.Adres set kodpocztowy=' + PodajWartosc(StringReplace(MaskEdit_AKodPocztowy.Text, '-', '', [rfReplaceAll])) + ',' +
-        ' poczta=' + PodajWartosc(Edit_APoczta.Text) + ',' +
-        ' gmina=' + PodajWartosc(Edit_AGminaDzielnica.Text) + ',' +
-        ' miejscowosc=' + PodajWartosc(Edit_AMiejscowosc.Text) + ',' +
-        ' ulica= ' + PodajWartosc(Edit_AUlica.Text) + ',' +
-        ' numerdomu=' + PodajWartosc(Edit_ANrDomu.Text) + ',' +
-        ' numerlokalu=' + PodajWartosc(Edit_ANrLokalu.Text) + ',' +
-        ' numertelefonu=' + PodajWartosc(MaskEdit_ANumerTelefonu.Text) + ',' +
-        ' symbolpanstwa=' + PodajWartosc(Edit_ASymbolPanstwa.Text) + ',' +
-        ' kodpocztowyzagr=' + PodajWartosc(Edit_AZagrKodPocztowy.Text) + ',' +
-        ' nazwapanstwa=' + PodajWartosc(Edit_ANazwaPanstwa.Text) + ',' +
-        ' email=' + PodajWartosc(Edit_AEmail.Text) +
-        ' where idAdres=%s ', []);
+      try
+        GdataBase.BeginTransaction;
+        xZapytanie := format(' Select idAdresSiedziby, idPracownik from public.Platnik where idPlatnik=%s ',
+          [intToStr(Fid)]);
+        xResultHandle := TResultHandle.CreateSQL(xZapytanie);
+        xResultHandle.InvokeSql;
+        xKluczAdres := xResultHandle.fieldbyname('idAdresSiedziby').AsInteger;
+        xKluczPracownik := xResultHandle.fieldbyname('idPracownik').AsInteger;
 
 
-      xRodzajDok := 0;
-      if ComboBox_RodzajDokumentu.Text = cTypDokumentuDowodStr then begin
-        xRodzajDok := cTypDokDowodosobisty;
+        xZapytanie := format('Update public.Adres set kodpocztowy=' + PodajWartosc(StringReplace(MaskEdit_AKodPocztowy.Text, '-', '', [rfReplaceAll])) + ',' +
+          ' poczta=' + PodajWartosc(Edit_APoczta.Text) + ',' +
+          ' gmina=' + PodajWartosc(Edit_AGminaDzielnica.Text) + ',' +
+          ' miejscowosc=' + PodajWartosc(Edit_AMiejscowosc.Text) + ',' +
+          ' ulica= ' + PodajWartosc(Edit_AUlica.Text) + ',' +
+          ' numerdomu=' + PodajWartosc(Edit_ANrDomu.Text) + ',' +
+          ' numerlokalu=' + PodajWartosc(Edit_ANrLokalu.Text) + ',' +
+          ' numertelefonu=' + PodajWartosc(MaskEdit_ANumerTelefonu.Text) + ',' +
+          ' symbolpanstwa=' + PodajWartosc(Edit_ASymbolPanstwa.Text) + ',' +
+          ' kodpocztowyzagr=' + PodajWartosc(Edit_AZagrKodPocztowy.Text) + ',' +
+          ' nazwapanstwa=' + PodajWartosc(Edit_ANazwaPanstwa.Text) + ',' +
+          ' email=' + PodajWartosc(Edit_AEmail.Text) +
+          ' where idAdres=%s ', [intToStr(xKluczAdres)]);
+
+        xResultHandle.Clear;
+        xResultHandle.Add(xZapytanie);
+        xResultHandle.ExecuteSql;
+
+
+        if ComboBox_RodzajDokumentu.Text = cTypDokumentuDowodStr then begin
+          xRodzajDok := cTypDokDowodosobisty;
+        end else begin
+          xRodzajDok := cTypDokumentuInny;
+        end;
+
+        xZapytanie := format(' Update public.Pracownik set rodzajdokumentu= ' + inttoStr(xRodzajDok) + ',' +
+          ' serianumerdokumentu = ' + PodajWartosc(Edit_PSeriaNumerDokumentu.Text) + ',' +
+          ' nazwisko=' + PodajWartosc(EditPNazwisko.Text) + ',' +
+          ' imie= ' + PodajWartosc(Edit_PIMie.Text) + ',' +
+          ' dataurodzenia =' + DateTimeToStr(DateTimePicker_PDataUrodzenia.DateTime) +
+          ' where idPracownik=%s ', [IntToStr(xKluczPracownik)]);
+
+        xResultHandle.Clear;
+        xResultHandle.Add(xZapytanie);
+        xResultHandle.ExecuteSql;
+
+
+        if ComboBox_PRodzajDokumentu.Text = cTypDokumentuDowodStr then begin
+          xRodzajDok := cTypDokDowodosobisty;
+        end else begin
+          xRodzajDok := cTypDokumentuInny;
+        end;
+
+        xZapytanie := format(' Update  public.Platnik set nip =' + PodajWartosc(MaskEdit_NIP.text) + ',' +
+          ' regon=' + PodajWartosc(MaskEdit_Regon.text) + '.' +
+          ' pesel=' + PodajWartosc(MaskEdit_Pesel.Text) + ',' +
+          ' rodzajdokumentu=' + IntToStr(xRodzajDok) + ',' +
+          ' serianumerdok=' + PodajWartosc(Edit_SeriaNumerDokumentu.Text) + ',' +
+          ' nazwaskrocona=' + PodajWartosc(Edit_NazwaSkrocona.Text) + ',' +
+          ' nazwisko=' + PodajWartosc(Edit_Nazwisko.Text) + ',' +
+          ' imie= ' + PodajWartosc(Edit_Imie.Text) +
+          ' where idPlatnik=%s', [IntTostr(xidPlatnik)]);
+
+        xResultHandle.Clear;
+        xResultHandle.Add(xZapytanie);
+        xResultHandle.ExecuteSql;
+
+
+        GdataBase.Commit;
+      except
+        GdataBase.Rollback;
       end;
-
-      xZapytanie := format(' Update public.Pracownik set rodzajdokumentu= ' + inttoStr(xRodzajDok) + ',' +
-        ' serianumerdokumentu = ' + PodajWartosc(Edit_PSeriaNumerDokumentu.Text) + ',' +
-        ' nazwisko=' + PodajWartosc(EditPNazwisko.Text) + ',' +
-        ' imie= ' + PodajWartosc(Edit_PIMie.Text) + ',' +
-        ' dataurodzenia =' + DateTimeToStr(DateTimePicker_PDataUrodzenia.DateTime) +
-        ' where idPracownik=%s ', []);
-
-
-      xRodzajDok := 0;
-      if ComboBox_RodzajDokumentu.Text = cTypDokumentuDowodStr then begin
-        xRodzajDok := cTypDokDowodosobisty;
-      end;
-
-      xZapytanie := format(' Update  public.Platnik set nip =' + PodajWartosc(MaskEdit_NIP.text) + ',' +
-        ' regon=' + PodajWartosc(MaskEdit_Regon.text) + '.' +
-        ' pesel=' + PodajWartosc(MaskEdit_Pesel.Text) + ',' +
-        ' rodzajdokumentu=' + IntToStr(xRodzajDok) + ',' +
-        ' serianumerdok=' + PodajWartosc(Edit_SeriaNumerDokumentu.Text) + ',' +
-        ' nazwaskrocona=' + PodajWartosc(Edit_NazwaSkrocona.Text) + ',' +
-        ' nazwisko=' + PodajWartosc(Edit_Nazwisko.Text) + ',' +
-        ' imie= ' + PodajWartosc(Edit_Imie.Text) +
-        ' where idPlatnik=%s', []);
-
-
-
-
     end;
   end;
 end;
