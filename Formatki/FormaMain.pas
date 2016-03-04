@@ -61,7 +61,7 @@ begin
     xItem := ListViewMain.Items.Add;
     xItem.Caption := xResultHandle.fieldbyname('Imie').AsString;
     xItem.SubItems.Add(xResultHandle.fieldbyname('Nazwisko').AsString);
-    xItem.SubItems.AddObject(xResultHandle.fieldbyname('Nazwisko').AsString, xid);
+    xItem.SubItems.AddObject(xResultHandle.fieldbyname('Pesel').AsString, xid);
     xResultHandle.next;
   end;
   xResultHandle.Clear;
