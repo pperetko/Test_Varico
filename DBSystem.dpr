@@ -9,7 +9,8 @@ uses
   Zmienne in 'Wspolne\Zmienne.pas',
   ObslugaKomponentow in 'Wspolne\ObslugaKomponentow.pas',
   Forma_Settings in 'Formatki\Forma_Settings.pas' {Form_Settings},
-  Froma_AddEdit in 'Formatki\Froma_AddEdit.pas' {Form_AddEdit};
+  Froma_AddEdit in 'Formatki\Froma_AddEdit.pas' {Form_AddEdit},
+  forma_print in 'Formatki\forma_print.pas' {Form2};
 
 {$R *.res}
 
@@ -19,7 +20,8 @@ begin
   GKomunikat := TKomunikat.Create;
   if GDataBase.StartDataBase('') then begin
     Application.CreateForm(TForm_Main, Form_Main);
-    Application.Run;
+  Application.CreateForm(TForm2, Form2);
+  Application.Run;
   end;
   GDataBase.Free;
   GKomunikat.Free;
