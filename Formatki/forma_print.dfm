@@ -1,9 +1,9 @@
-object Form2: TForm2
+object Form_print: TForm_print
   Left = 195
   Top = 302
   Width = 960
   Height = 691
-  Caption = 'Form2'
+  Caption = 'Form_print'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

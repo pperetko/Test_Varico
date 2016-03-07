@@ -21,7 +21,7 @@ object Form_Main: TForm_Main
     Width = 929
     Height = 49
     ButtonHeight = 21
-    ButtonWidth = 47
+    ButtonWidth = 65
     Caption = 'ToolBar_main'
     ShowCaptions = True
     TabOrder = 0
@@ -39,22 +39,29 @@ object Form_Main: TForm_Main
       ImageIndex = 1
     end
     object ToolButton_Edytuj: TToolButton
-      Left = 86
+      Left = 104
       Top = 2
       Action = Action_Edytuj
     end
     object ToolButton_Pliki: TToolButton
-      Left = 133
+      Left = 169
       Top = 2
       Caption = 'Pliki'
       ImageIndex = 3
     end
     object ToolButton_Odswiez: TToolButton
-      Left = 180
+      Left = 234
       Top = 2
       Caption = 'Odswie'#380
       ImageIndex = 4
       OnClick = ToolButton_OdswiezClick
+    end
+    object ToolButton1: TToolButton
+      Left = 299
+      Top = 2
+      Caption = 'ToolButton1'
+      ImageIndex = 5
+      OnClick = ToolButton1Click
     end
   end
   object ListViewMain: TListView

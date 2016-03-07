@@ -18,11 +18,13 @@ type
     ActionList1: TActionList;
     ToolButton_Odswiez: TToolButton;
     Action_Edytuj: TAction;
+    ToolButton1: TToolButton;
     procedure Action_DodajExecute(Sender: TObject);
     procedure ToolButton_OdswiezClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Action_EdytujExecute(Sender: TObject);
     procedure Action_EdytujUpdate(Sender: TObject);
+    procedure ToolButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,7 +36,7 @@ var
   Form_Main: TForm_Main;
 
 implementation
-uses Froma_AddEdit, Zmienne, stale, DataBase, funkcje;
+uses Froma_AddEdit, Zmienne, stale, DataBase, funkcje, WydrukZUS3;
 {$R *.dfm}
 
 procedure TForm_Main.Action_DodajExecute(Sender: TObject);
@@ -114,6 +116,15 @@ end;
 procedure TForm_Main.Action_EdytujUpdate(Sender: TObject);
 begin
   ToolButton_Edytuj.Enabled := ListViewMain.ItemIndex <> -1;
+end;
+
+procedure TForm_Main.ToolButton1Click(Sender: TObject);
+var
+ xObject:TosWydrukZUS3;
+begin
+ xObject:=  TosWydrukZUS3.Create(1);
+ xObject.PokazWydruk;
+ xObject.Free;
 end;
 
 end.

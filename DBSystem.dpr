@@ -10,7 +10,8 @@ uses
   ObslugaKomponentow in 'Wspolne\ObslugaKomponentow.pas',
   Forma_Settings in 'Formatki\Forma_Settings.pas' {Form_Settings},
   Froma_AddEdit in 'Formatki\Froma_AddEdit.pas' {Form_AddEdit},
-  forma_print in 'Formatki\forma_print.pas' {Form2};
+  DMPrint in 'Formatki\DMPrint.pas' {DataModuleReport: TDataModule},
+  WydrukZUS3 in 'Wydruki\WydrukZUS3.pas';
 
 {$R *.res}
 
@@ -18,12 +19,13 @@ begin
   Application.Initialize;
   GDataBase := TDataBase.Create;
   GKomunikat := TKomunikat.Create;
+  GDataModuleReport := TDataModuleReport.Create(nil);
   if GDataBase.StartDataBase('') then begin
     Application.CreateForm(TForm_Main, Form_Main);
-  Application.CreateForm(TForm2, Form2);
   Application.Run;
   end;
   GDataBase.Free;
   GKomunikat.Free;
+  GDataModuleReport.Free;
 end.
 
