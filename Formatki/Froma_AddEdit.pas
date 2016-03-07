@@ -4,65 +4,65 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Mask, ExtCtrls, ComCtrls;
+  Dialogs, StdCtrls, ComCtrls, ExtCtrls, Mask;
 
 type
-  TForm_addEdit = class(TForm)
+  TForm_AddEdit = class(TForm)
     Label_NIP: TLabel;
-    MaskEdit_NIP: TMaskEdit;
     Label_Regon: TLabel;
-    MaskEdit_Regon: TMaskEdit;
     Label_Pesel: TLabel;
-    MaskEdit_Pesel: TMaskEdit;
     Label_RodzajDokumentu: TLabel;
-    ComboBox_RodzajDokumentu: TComboBox;
     Label2: TLabel;
-    Edit_SeriaNumerDokumentu: TEdit;
     Label_NazwaSkrocona: TLabel;
-    Edit_NazwaSkrocona: TEdit;
     Label3: TLabel;
-    Edit_Nazwisko: TEdit;
     Label_Imie: TLabel;
+    Label_AkodPocztowy: TLabel;
+    Label_APoczta: TLabel;
+    Label_AGminaDzielnica: TLabel;
+    Label_Amiejscowosc: TLabel;
+    Label_aUlica: TLabel;
+    Label_ANrDomu: TLabel;
+    Label_ANumerLokalu: TLabel;
+    Label_ANumerTelefonu: TLabel;
+    Label_SymbPanstwa: TLabel;
+    LabelAZagrKodPoczt: TLabel;
+    Label_ANazzwaPanstwa: TLabel;
+    Label_AEmail: TLabel;
+    Label_PPesel: TLabel;
+    Label_PRodzajDokumentu: TLabel;
+    Label_PSeriaNumer: TLabel;
+    Label_PNazwisko: TLabel;
+    Label_PImie: TLabel;
+    Label_PDataUrodzenia: TLabel;
+    MaskEdit_NIP: TMaskEdit;
+    MaskEdit_Regon: TMaskEdit;
+    MaskEdit_Pesel: TMaskEdit;
+    ComboBox_RodzajDokumentu: TComboBox;
+    Edit_SeriaNumerDokumentu: TEdit;
+    Edit_NazwaSkrocona: TEdit;
+    Edit_Nazwisko: TEdit;
     Edit_Imie: TEdit;
     Memo_Pomoc1: TMemo;
-    Label_AkodPocztowy: TLabel;
     MaskEdit_AKodPocztowy: TMaskEdit;
-    Label_APoczta: TLabel;
     Edit_APoczta: TEdit;
-    Label_AGminaDzielnica: TLabel;
     Edit_AGminaDzielnica: TEdit;
-    Label_Amiejscowosc: TLabel;
     Edit_AMiejscowosc: TEdit;
-    Label_aUlica: TLabel;
     Edit_AUlica: TEdit;
-    Label_ANrDomu: TLabel;
     Edit_ANrDomu: TEdit;
-    Label_ANumerLokalu: TLabel;
     Edit_ANrLokalu: TEdit;
-    Label_ANumerTelefonu: TLabel;
     MaskEdit_ANumerTelefonu: TMaskEdit;
-    Label_SymbPanstwa: TLabel;
     Edit_ASymbolPanstwa: TEdit;
-    LabelAZagrKodPoczt: TLabel;
     Edit_AZagrKodPocztowy: TEdit;
-    Label_ANazzwaPanstwa: TLabel;
     Edit_ANazwaPanstwa: TEdit;
-    Label_AEmail: TLabel;
     Edit_AEmail: TEdit;
     Panel1: TPanel;
     Panel2: TPanel;
-    Label_PPesel: TLabel;
     MaskEdit_PPesel: TMaskEdit;
-    Label_PRodzajDokumentu: TLabel;
     ComboBox_PRodzajDokumentu: TComboBox;
-    Label_PSeriaNumer: TLabel;
     Edit_PSeriaNumerDokumentu: TEdit;
-    Label_PNazwisko: TLabel;
     EditPNazwisko: TEdit;
-    Label_PImie: TLabel;
     Edit_PIMie: TEdit;
     DateTimePicker_PDataUrodzenia: TDateTimePicker;
-    Label_PDataUrodzenia: TLabel;
     Button_Akceptuj: TButton;
     Button_Anuluj: TButton;
     MemoPomoc2: TMemo;
@@ -72,7 +72,6 @@ type
   public
     { Public declarations }
   end;
-
 
 
 
@@ -94,16 +93,13 @@ type
     destructor destroy; override;
     class function Pokaz(aid: Integer): boolean;
     function PokazFormatke: boolean;
-
-
-
-
   end;
 
 
 
 
 implementation
+
 uses Stale, DataBase, funkcje, DB;
 
 const
@@ -116,9 +112,6 @@ resourcestring
   cTypDokumentuInnyStr = 'Inny dokument';
 
 {$R *.dfm}
-
-{ TFormularzZus3 }
-
 
 
 constructor TFormularzZus3.Create(aid: integer);
@@ -175,25 +168,6 @@ end;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 procedure TFormularzZus3.UstawEdytowaneDane;
 var
   xZapytanie: string;
@@ -201,7 +175,7 @@ var
 begin
   with FFormatka do begin
     xZapytanie := format(
-      ' Select Platnik.nip as platnik_nip, Platnik.regon as platnik_regon, Platnik.pesel as platnik_pesel, '+
+      ' Select Platnik.nip as platnik_nip, Platnik.regon as platnik_regon, Platnik.pesel as platnik_pesel, ' +
       ' Platnik.rodzajdokumentu as platnik_rodzajDok, Platnik.serianumerdok  as platnik_seriaDok, ' +
       ' Platnik.nazwaskrocona as platnik_nazwaSkr,platnik.nazwisko as platnik_nazwisko, ' +
       ' Platnik.imie as platnik_imie, Pracownik.rodzajdokumentu as prac_rodzajDok, Pracownik.serianumerdokumentu as prac_seriaDok,' +
@@ -218,7 +192,7 @@ begin
     xResultHandle.InvokeSql;
     if xResultHandle.RecordCount = 1 then begin
       WyczyscKomponenty; //Adres
-      MaskEdit_AKodPocztowy.Text := copy(xResultHandle.fieldbyname('adres_kodPocztowy').AsString, 1, 2) + '-'+
+      MaskEdit_AKodPocztowy.Text := copy(xResultHandle.fieldbyname('adres_kodPocztowy').AsString, 1, 2) + '-' +
         copy(xResultHandle.fieldbyname('adres_kodPocztowy').AsString, 3,
         length(xResultHandle.fieldbyname('adres_kodPocztowy').AsString));
       Edit_APoczta.Text := xResultHandle.fieldbyname('adres_poczta').AsString;
@@ -494,7 +468,6 @@ begin
     end;
   end;
 end;
-
 
 
 end.

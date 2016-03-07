@@ -1,10 +1,9 @@
-object Form_addEdit: TForm_addEdit
-  Left = 325
-  Top = 114
-  BorderStyle = bsSingle
-  Caption = 'ZA'#346'WIADCZENIE P'#321'ATNIKA SK'#321'ADEK'
-  ClientHeight = 623
-  ClientWidth = 862
+object Form_AddEdit: TForm_AddEdit
+  Left = 305
+  Top = 107
+  Width = 873
+  Height = 644
+  Caption = 'Formularz ZUS 3'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,7 +11,6 @@ object Form_addEdit: TForm_addEdit
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label_NIP: TLabel
@@ -200,7 +198,7 @@ object Form_addEdit: TForm_addEdit
   object MaskEdit_NIP: TMaskEdit
     Left = 96
     Top = 12
-    Width = 121
+    Width = 116
     Height = 21
     EditMask = '9999999999;1;_'
     MaxLength = 10
@@ -210,7 +208,7 @@ object Form_addEdit: TForm_addEdit
   object MaskEdit_Regon: TMaskEdit
     Left = 336
     Top = 12
-    Width = 120
+    Width = 116
     Height = 21
     EditMask = '99999999999999;1;_'
     MaxLength = 14
@@ -220,7 +218,7 @@ object Form_addEdit: TForm_addEdit
   object MaskEdit_Pesel: TMaskEdit
     Left = 560
     Top = 12
-    Width = 120
+    Width = 117
     Height = 21
     EditMask = '99999999999;1;_'
     MaxLength = 11
@@ -230,7 +228,7 @@ object Form_addEdit: TForm_addEdit
   object ComboBox_RodzajDokumentu: TComboBox
     Left = 112
     Top = 44
-    Width = 145
+    Width = 142
     Height = 21
     Style = csDropDownList
     ItemHeight = 13
@@ -239,7 +237,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_SeriaNumerDokumentu: TEdit
     Left = 416
     Top = 44
-    Width = 265
+    Width = 262
     Height = 21
     MaxLength = 15
     TabOrder = 4
@@ -247,14 +245,14 @@ object Form_addEdit: TForm_addEdit
   object Edit_NazwaSkrocona: TEdit
     Left = 112
     Top = 75
-    Width = 569
+    Width = 566
     Height = 21
     TabOrder = 5
   end
   object Edit_Nazwisko: TEdit
     Left = 112
     Top = 107
-    Width = 569
+    Width = 566
     Height = 21
     MaxLength = 31
     TabOrder = 6
@@ -262,7 +260,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_Imie: TEdit
     Left = 112
     Top = 139
-    Width = 569
+    Width = 566
     Height = 21
     MaxLength = 31
     TabOrder = 7
@@ -270,7 +268,7 @@ object Form_addEdit: TForm_addEdit
   object Memo_Pomoc1: TMemo
     Left = 685
     Top = 7
-    Width = 169
+    Width = 166
     Height = 153
     Color = clBtnFace
     Lines.Strings = (
@@ -287,7 +285,7 @@ object Form_addEdit: TForm_addEdit
   object MaskEdit_AKodPocztowy: TMaskEdit
     Left = 112
     Top = 181
-    Width = 81
+    Width = 79
     Height = 21
     EditMask = '99-999;1;_'
     MaxLength = 6
@@ -297,7 +295,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_APoczta: TEdit
     Left = 266
     Top = 181
-    Width = 417
+    Width = 415
     Height = 21
     MaxLength = 24
     TabOrder = 10
@@ -305,7 +303,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_AGminaDzielnica: TEdit
     Left = 112
     Top = 204
-    Width = 417
+    Width = 415
     Height = 21
     MaxLength = 26
     TabOrder = 11
@@ -313,7 +311,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_AMiejscowosc: TEdit
     Left = 112
     Top = 228
-    Width = 417
+    Width = 415
     Height = 21
     MaxLength = 26
     TabOrder = 12
@@ -321,7 +319,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_AUlica: TEdit
     Left = 112
     Top = 254
-    Width = 417
+    Width = 415
     Height = 21
     MaxLength = 26
     TabOrder = 13
@@ -329,7 +327,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_ANrDomu: TEdit
     Left = 112
     Top = 279
-    Width = 105
+    Width = 103
     Height = 21
     MaxLength = 7
     TabOrder = 14
@@ -337,7 +335,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_ANrLokalu: TEdit
     Left = 312
     Top = 279
-    Width = 105
+    Width = 103
     Height = 21
     MaxLength = 7
     TabOrder = 15
@@ -345,7 +343,7 @@ object Form_addEdit: TForm_addEdit
   object MaskEdit_ANumerTelefonu: TMaskEdit
     Left = 536
     Top = 279
-    Width = 152
+    Width = 151
     Height = 21
     EditMask = '9999999999;1;_'
     MaxLength = 10
@@ -355,7 +353,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_ASymbolPanstwa: TEdit
     Left = 128
     Top = 303
-    Width = 86
+    Width = 85
     Height = 21
     MaxLength = 2
     TabOrder = 17
@@ -363,7 +361,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_AZagrKodPocztowy: TEdit
     Left = 400
     Top = 303
-    Width = 289
+    Width = 288
     Height = 21
     MaxLength = 12
     TabOrder = 18
@@ -371,7 +369,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_ANazwaPanstwa: TEdit
     Left = 128
     Top = 332
-    Width = 273
+    Width = 272
     Height = 21
     MaxLength = 22
     TabOrder = 19
@@ -379,7 +377,7 @@ object Form_addEdit: TForm_addEdit
   object Edit_AEmail: TEdit
     Left = 168
     Top = 360
-    Width = 521
+    Width = 520
     Height = 21
     MaxLength = 26
     TabOrder = 20
@@ -387,7 +385,7 @@ object Form_addEdit: TForm_addEdit
   object Panel1: TPanel
     Left = 0
     Top = 160
-    Width = 857
+    Width = 856
     Height = 17
     BevelOuter = bvNone
     Caption = 'DANE ADRESOWE P'#321'ATNIKA SK'#321'ADEK '#8211' ADRES SIEDZIBY'
@@ -403,7 +401,7 @@ object Form_addEdit: TForm_addEdit
   object Panel2: TPanel
     Left = -1
     Top = 382
-    Width = 865
+    Width = 864
     Height = 19
     Caption = 'DANE IDENTYFIKACYJNE PRACOWNIKA'
     Color = clBlue

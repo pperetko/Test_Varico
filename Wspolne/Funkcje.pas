@@ -34,6 +34,14 @@ type
 
     procedure WyswietlKomunikat(AKomunikat: string; ANaglowek: string); overload;
   end;
+
+
+  Tid = class
+  public
+    Fid: integer;
+    Findex: integer;
+  end;
+
 var
   GKomunikat: TKomunikat;
 implementation
@@ -152,7 +160,7 @@ end;
 
 procedure TKomunikat.WyswietlKomunikat(AKomunikat, ANaglowek: string);
 begin
-   with Application do begin
+  with Application do begin
     MessageBox(PChar(AKomunikat), PChar(ANaglowek), mb_OK or mb_IconInformation or mb_ApplModal);
   end;
 end;

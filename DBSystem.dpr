@@ -8,15 +8,15 @@ uses
   Stale in 'Wspolne\Stale.pas',
   Zmienne in 'Wspolne\Zmienne.pas',
   ObslugaKomponentow in 'Wspolne\ObslugaKomponentow.pas',
-  Froma_AddEdit in 'Formatki\Froma_AddEdit.pas' {Form_addEdit},
-  Forma_Settings in 'Formatki\Forma_Settings.pas' {Form_Settings};
+  Forma_Settings in 'Formatki\Forma_Settings.pas' {Form_Settings},
+  Froma_AddEdit in 'Formatki\Froma_AddEdit.pas' {Form_AddEdit};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   GDataBase := TDataBase.Create;
-  GKomunikat:= TKomunikat.Create;
+  GKomunikat := TKomunikat.Create;
   if GDataBase.StartDataBase('') then begin
     Application.CreateForm(TForm_Main, Form_Main);
     Application.Run;
