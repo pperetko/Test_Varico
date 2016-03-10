@@ -44,6 +44,7 @@ Create table Adres(
 
 Create table Pracownik(
  idPracownik integer not NULL,
+ Pesel       varchar(11),
  RodzajDokumentu smallint,
  SeriaNumerDokumentu varchar(15),
  Nazwisko varchar(31),

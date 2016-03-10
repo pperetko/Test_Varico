@@ -3,13 +3,14 @@ unit DMPrint;
 interface
 
 uses
-  SysUtils, Classes, frxClass, frxExportPDF;
+  SysUtils, Classes, frxClass, frxExportPDF, DB, frxADOComponents, frxDBSet;
 
 type
   TDataModuleReport = class(TDataModule)
     frxReport: TfrxReport;
-    frxUserDataSet: TfrxUserDataSet;
     frxPDFExport: TfrxPDFExport;
+    DataSource1: TDataSource;
+    frxDBDataset1: TfrxDBDataset;
   private
     { Private declarations }
   public

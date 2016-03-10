@@ -18,13 +18,15 @@ type
     ActionList1: TActionList;
     ToolButton_Odswiez: TToolButton;
     Action_Edytuj: TAction;
-    ToolButton1: TToolButton;
+    ToolButton_Wydruk: TToolButton;
+    Action_Wydruk: TAction;
     procedure Action_DodajExecute(Sender: TObject);
     procedure ToolButton_OdswiezClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure Action_EdytujExecute(Sender: TObject);
     procedure Action_EdytujUpdate(Sender: TObject);
-    procedure ToolButton1Click(Sender: TObject);
+    procedure Action_WydrukExecute(Sender: TObject);
+    procedure Action_WydrukUpdate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -118,13 +120,18 @@ begin
   ToolButton_Edytuj.Enabled := ListViewMain.ItemIndex <> -1;
 end;
 
-procedure TForm_Main.ToolButton1Click(Sender: TObject);
+procedure TForm_Main.Action_WydrukExecute(Sender: TObject);
 var
- xObject:TosWydrukZUS3;
+  xObject: TosWydrukZUS3;
 begin
- xObject:=  TosWydrukZUS3.Create(1);
- xObject.PokazWydruk;
- xObject.Free;
+  xObject := TosWydrukZUS3.Create(15000);
+  xObject.PokazWydruk;
+  xObject.Free;
+end;
+
+procedure TForm_Main.Action_WydrukUpdate(Sender: TObject);
+begin
+  ToolButton_Wydruk.Enabled := ListViewMain.ItemIndex <> -1;
 end;
 
 end.
