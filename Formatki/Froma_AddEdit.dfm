@@ -1,9 +1,9 @@
-object Form_AddEdit: TForm_AddEdit
-  Left = 305
+object From_AddEdit: TFrom_AddEdit
+  Left = 192
   Top = 107
-  Width = 873
-  Height = 644
-  Caption = 'Formularz ZUS 3'
+  Width = 870
+  Height = 581
+  Caption = 'Dane do wydruku ZUS 3'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -399,7 +399,7 @@ object Form_AddEdit: TForm_AddEdit
     TabOrder = 21
   end
   object Panel2: TPanel
-    Left = -1
+    Left = -3
     Top = 382
     Width = 864
     Height = 19
@@ -467,7 +467,7 @@ object Form_AddEdit: TForm_AddEdit
   end
   object Button_Akceptuj: TButton
     Left = 328
-    Top = 584
+    Top = 529
     Width = 75
     Height = 25
     Caption = '&Akceptuj'
@@ -475,7 +475,7 @@ object Form_AddEdit: TForm_AddEdit
   end
   object Button_Anuluj: TButton
     Left = 416
-    Top = 584
+    Top = 529
     Width = 75
     Height = 25
     Caption = 'A&nuluj'
@@ -500,7 +500,7 @@ object Form_AddEdit: TForm_AddEdit
   end
   object MemoPOmoc3: TMemo
     Left = 693
-    Top = 400
+    Top = 361
     Width = 169
     Height = 193
     Color = clBtnFace

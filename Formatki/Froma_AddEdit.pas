@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Mask;
 
 type
-  TForm_AddEdit = class(TForm)
+  TFrom_AddEdit = class(TForm)
     Label_NIP: TLabel;
     Label_Regon: TLabel;
     Label_Pesel: TLabel;
@@ -74,11 +74,11 @@ type
   end;
 
 
-
+  
   TFormularzZus3 = class(TObject)
   private
     Fid: integer;
-    FFormatka: TForm_addEdit;
+    FFormatka: TFrom_addEdit;
     procedure InicjujFormatke();
     procedure WyborAkceptuj(Asender: Tobject);
     procedure WyborAnuluj(Asender: Tobject);
@@ -95,10 +95,11 @@ type
     function PokazFormatke: boolean;
   end;
 
-
-
+var
+  From_AddEdit: TFrom_AddEdit;
 
 implementation
+
 
 uses Stale, DataBase, funkcje, DB;
 
@@ -111,13 +112,17 @@ resourcestring
   cTypDokumentuDowodStr = 'Dowód osobisty';
   cTypDokumentuInnyStr = 'Inny dokument';
 
+
+
+
 {$R *.dfm}
+
 
 
 constructor TFormularzZus3.Create(aid: integer);
 begin
   Fid := aid;
-  Application.CreateForm(TForm_addEdit, FFormatka);
+  Application.CreateForm(TFrom_addEdit, FFormatka);
   with FFormatka do begin
     InicjujFormatke;
   end;
@@ -178,7 +183,7 @@ begin
       ' Select Platnik.nip as platnik_nip, Platnik.regon as platnik_regon, Platnik.pesel as platnik_pesel, ' +
       ' Platnik.rodzajdokumentu as platnik_rodzajDok, Platnik.serianumerdok  as platnik_seriaDok, ' +
       ' Platnik.nazwaskrocona as platnik_nazwaSkr,platnik.nazwisko as platnik_nazwisko, ' +
-      ' Platnik.imie as platnik_imie, Pracownik.rodzajdokumentu as prac_rodzajDok, Pracownik.serianumerdokumentu as prac_seriaDok,' +
+      ' Platnik.imie as platnik_imie,Pracownik.Pesel as prac_pesel, Pracownik.rodzajdokumentu as prac_rodzajDok, Pracownik.serianumerdokumentu as prac_seriaDok,' +
       ' Pracownik.nazwisko as prac_nazwisko, Pracownik.imie as prac_imie,  Pracownik.dataurodzenia as prac_dataUrodzenia,' +
       ' Adres.kodpocztowy as adres_kodPocztowy, Adres.poczta  as adres_poczta, Adres.gmina as adres_gmina, ' +
       ' Adres.miejscowosc as adres_miejscowosc, Adres.ulica as adres_ulica, Adres.numerdomu as adres_numerdomu ,' +
@@ -207,6 +212,7 @@ begin
       Edit_ANazwaPanstwa.Text := xResultHandle.fieldbyname('adres_nazwaPanstwa').AsString;
       Edit_AEmail.Text := xResultHandle.fieldbyname('adres_email').AsString;
        //Pracownik;
+      MaskEdit_PPesel.Text:= xResultHandle.fieldbyname('prac_pesel').AsString;
       if xResultHandle.FieldByName('prac_rodzajDok').AsInteger = cTypDokDowodOsobisty then begin
         ComboBox_PRodzajDokumentu.ItemIndex := ComboBox_PRodzajDokumentu.Items.IndexOf(cTypDokumentuDowodStr);
       end else begin
@@ -341,10 +347,10 @@ begin
         xRodzajDok := cTypDokumentuInny;
       end;
       xZapytanie := format('Insert into public.Pracownik( idpracownik, rodzajdokumentu, serianumerdokumentu, ' +
-        ' nazwisko, imie, dataurodzenia ) values(%s, %s,''%s'',''%s'',''%s'',''%s'')',
+        ' nazwisko, imie, dataurodzenia, pesel ) values(%s, %s,''%s'',''%s'',''%s'',''%s'',''%s'')',
         [intToStr(xKluczPracownik), inttoStr(xRodzajDok),
         PodajWartosc(Edit_PSeriaNumerDokumentu.Text), PodajWartosc(EditPNazwisko.Text), PodajWartosc(Edit_PIMie.Text),
-          DateTimeToStr(DateTimePicker_PDataUrodzenia.DateTime)]
+          DateTimeToStr(DateTimePicker_PDataUrodzenia.DateTime), PodajWartosc(MaskEdit_PPesel.Text)]
 
         );
 
@@ -432,6 +438,7 @@ begin
           ' serianumerdokumentu = ' + QuotedStr(PodajWartosc(Edit_PSeriaNumerDokumentu.Text)) + ',' +
           ' nazwisko=' + QuotedStr(PodajWartosc(EditPNazwisko.Text)) + ',' +
           ' imie= ' + QuotedStr(PodajWartosc(Edit_PIMie.Text)) + ',' +
+          ' pesel= '+ QuotedStr(MaskEdit_PPesel.Text)+','+
           ' dataurodzenia =' + QuotedStr(DateTimeToStr(DateTimePicker_PDataUrodzenia.DateTime)) +
           ' where idPracownik=%s ', [IntToStr(xKluczPracownik)]);
 
@@ -470,5 +477,6 @@ begin
 end;
 
 
-end.
 
+
+end.

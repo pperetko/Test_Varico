@@ -12,13 +12,12 @@ function PodajNazweSystemu: string;
 function PodajWersjeSystemu: string;
 function PodajNazweBazy: string;
 function PodajWersjeBazy: string;
-function PodajZWersionRC(AString: string): string;
 procedure WyczyscStringGrida(AStringGrid: TStringGrid);
 function PodajListePlikowWKatalogu(Akatalog: string; var Alista: TStringList): integer;
 function IsDirNotation(ADirName: string): Boolean;
 function PodajNazwePlikuKataloguZeSciezki(ANapis: string): string;
 //Funkcja podaje nazwê stacji roboczej
-function GetLocalComputerName: string;
+function PodajZWersionRC(AString: string): string;
 function DateTimeToSql(Avalue: TDateTime): string;
 function PodajWartosc(Astring: string): string;
 
@@ -50,14 +49,14 @@ implementation
 
 function PodajPathSystem: string;
 begin
-  result := ExpandUNCFileName(IncludeTrailingBackslash(ExtractFilePath(ParamStr(0))));
+  result := ExpandUNCFileName(IncludeTrailingPathDelimiter (ExtractFilePath(ParamStr(0))));
 end;
 
 //####################################################################################################################
 
 function PodajPathIniFile: string;
 begin
-  result := ExpandUNCFileName(IncludeTrailingBackslash(ExtractFilePath(ParamStr(0)))) + CNazwaPlikuIni;
+  result := ExpandUNCFileName(IncludeTrailingPathDelimiter(ExtractFilePath(ParamStr(0)))) + CNazwaPlikuIni;
 end;
 //####################################################################################################################
 
@@ -92,30 +91,6 @@ begin
 end;
 //####################################################################################################################
 
-function PodajZWersionRC(AString: string): string;
-var
-  InfoSize, Wnd, VerSize: DWORD;
-  VerBuf: Pointer;
-  FI: PVSFixedFileInfo;
-  p: array[byte] of char;
-begin
-  Result := '';
-  if (trim(AString) <> '') then begin
-    InfoSize := GetFileVersionInfoSize(PChar(ParamStr(0)), Wnd);
-    if (InfoSize <> 0) then begin
-      GetMem(VerBuf, InfoSize);
-      try
-        if GetFileVersionInfo(PChar(ParamStr(0)), Wnd, InfoSize, VerBuf) then
-          if VerQueryValue(VerBuf, PAnsiChar('\\StringFileInfo\\041504E2\\' + Trim(AString)), Pointer(FI), VerSize) then begin
-            strCopy(PChar(@p[0]), PChar(FI));
-            Result := StrPas(p);
-          end;
-      finally
-        FreeMem(VerBuf);
-      end;
-    end;
-  end;
-end;
 //####################################################################################################################
 
 function PodajNazweSystemu: string;
@@ -218,16 +193,6 @@ begin
 end;
 //####################################################################################################################
 
-function GetLocalComputerName: string;
-var Count: DWORD;
-begin
-  Result := '';
-  Count := MAX_COMPUTERNAME_LENGTH + 1;
-  SetLength(Result, Count);
-  if GetComputerName(PChar(Result), Count) then begin
-    SetLength(Result, StrLen(PChar(Result)));
-  end;
-end;
 
 //####################################################################################################################
 
@@ -253,5 +218,30 @@ begin
   result := trim(xResult);
 end;
 //####################################################################################################################
+
+function PodajZWersionRC(AString: string): string;
+var
+  InfoSize, Wnd, VerSize: DWORD;
+  VerBuf: Pointer;
+  FI: PVSFixedFileInfo;
+  p: array[byte] of char;
+begin
+  Result := '';
+  if (trim(AString) <> '') then begin
+    InfoSize := GetFileVersionInfoSize(PChar(ParamStr(0)), Wnd);
+    if (InfoSize <> 0) then begin
+      GetMem(VerBuf, InfoSize);
+      try
+        if GetFileVersionInfo(PChar(ParamStr(0)), Wnd, InfoSize, VerBuf) then
+          if VerQueryValue(VerBuf, PAnsiChar('\\StringFileInfo\\041504E2\\' + Trim(AString)), Pointer(FI), VerSize) then begin
+            strCopy(PChar(@p[0]), PChar(FI));
+            Result := StrPas(p);
+          end;
+      finally
+        FreeMem(VerBuf);
+      end;
+    end;
+  end;
+end;
 end.
 
