@@ -77,3 +77,13 @@ CREATE TABLE platnik (
     FOREIGN KEY(idPracownik) REFERENCES
     Pracownik(idPracownik) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+
+
+Create Table Plik(
+ IDM SERIAL,
+ DataUtworzenia timestamp default current_timestamp,
+ sciezka varchar(255), 
+ nazwa varchar(255),
+ CONSTRAINT key_plik UNIQUE (IDM)
+);

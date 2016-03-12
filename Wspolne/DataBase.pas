@@ -27,7 +27,9 @@ type
     FSesjaId: string;
     FConnection: TADOConnection;
     Flist: TList; //Lista Result Handle
+    FFolderEksport: string;
     procedure ZwolnijResultHandle;
+
   public
     czyTransakcja: boolean;
     constructor Create;
@@ -39,6 +41,9 @@ type
     function MaxId(Tabela: string; AliczbaLock: integer = 1): integer;
     procedure RejestrujResultHandle(Aresult: TResultHandle);
     procedure WyrejestrujResultHandle(Aresult: TResultHandle);
+    function InicjujKatalogEksportowy: boolean;
+    property
+      foldereksport: string read FFolderEksport;
   end;
 
 
@@ -49,6 +54,7 @@ type
     function GetServerName: string;
     function GetdatabaseUserPassword: string;
     function GetdatabaseUser: string;
+    function GetProviderName:string;
   public
     constructor Create;
     destructor destroy; override;
@@ -60,12 +66,18 @@ type
 var
   GdataBase: TDataBase;
 implementation
-uses Funkcje, stale, Zmienne;
+uses Funkcje, stale, Zmienne, FormaMain;
 const
 
-  CconnectionString = 'Provider=PostgreSQL OLE DB Provider;Password=%s;User ID=%s;Data Source=%s;Location=%s;Extended Properties=''''';
+  //Provider=PostgreSQL OLE DB Provider
+  CconnectionString = '%s;Password=%s;User ID=%s;Data Source=%s;Location=%s;Extended Properties=''''';
   CLiczbaLP = 15000;
   CTimeOUT = 3600;
+
+resourcestring
+
+  cpdf = 'pdf';
+
 //####################################################################################################################
 { TDataBase }
 //####################################################################################################################
@@ -117,6 +129,20 @@ begin
   inherited;
 end;
 //####################################################################################################################
+//cpdf
+
+function TDataBase.InicjujKatalogEksportowy: boolean;
+begin
+  result := true;
+  try
+    FFolderEksport := IncludeTrailingPathDelimiter(PodajkatalogMojeDokumenty(0)) + cpdf;
+    if not DirectoryExists(FFolderEksport) then begin
+      result := CreateDir(FFolderEksport);
+    end;
+  except
+    result := false;
+  end;
+end;
 
 function TDataBase.MaxId(Tabela: string; AliczbaLock: integer): integer;
 var
@@ -331,9 +357,9 @@ end;
 
 constructor TConnectionString.Create;
 var
- xPath:string;
+  xPath: string;
 begin
-  xPath:= PodajPathIniFile();
+  xPath := PodajPathIniFile();
   FIniFile := TIniFile.Create(xPath);
 end;
 
@@ -363,9 +389,9 @@ begin
   xUserPass := GetdatabaseUserPassword;
   if (xDatabaseName <> EmptyStr) and (xServerName <> EmptyStr) and (xUserName <> EmptyStr) and (xUserPass <> EmptyStr) then begin
     if trim(AHaslo) = '' then begin
-      xConnectionString := Format(CconnectionString, [xUserPass, xUserName, xServerName, xDatabaseName]);
+      xConnectionString := Format(CconnectionString, [GetProviderName, xUserPass, xUserName, xServerName, xDatabaseName]);
     end else begin
-      xConnectionString := Format(CconnectionString, [AHaslo, xUserName, xServerName, xDatabaseName]);
+      xConnectionString := Format(CconnectionString, [GetProviderName, AHaslo, xUserName, xServerName, xDatabaseName]);
     end;
   end;
   result := xConnectionString;
@@ -388,6 +414,13 @@ function TConnectionString.GetdatabaseUserPassword: string;
 begin
   result := FIniFile.ReadString(CSekcjaConnect, CUSERPASS, '');
 end;
+//####################################################################################################################
+
+function TConnectionString.GetProviderName: string;
+begin
+  result := FIniFile.ReadString(CSekcjaConnect, CPROVIDER, 'Provider=PostgreSQL OLE DB Provider');
+end;
+
 //####################################################################################################################
 
 function TConnectionString.GetServerName: string;

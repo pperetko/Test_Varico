@@ -20,7 +20,12 @@ function PodajNazwePlikuKataloguZeSciezki(ANapis: string): string;
 function PodajZWersionRC(AString: string): string;
 function DateTimeToSql(Avalue: TDateTime): string;
 function PodajWartosc(Astring: string): string;
+function PodajkatalogMojeDokumenty(AHandle: HWND): string;
 
+function UruchamiajProgramy(APlikExe: string; AParametry: string = '';
+     ASciezkaDomyslna: string = ''; APoprzezProces: Boolean = False;
+     ACzekajNaKoniec: Boolean = True;
+     AChowajZrodlo: Boolean = True): Integer;
 
 type
 
@@ -243,5 +248,59 @@ begin
     end;
   end;
 end;
+
+
+function PodajkatalogMojeDokumenty(AHandle: HWND): string;
+var
+  Allocator: IMalloc;
+  SpecialDir: PItemIdList;
+  FBuf: array[0..MAX_PATH] of Char;
+begin
+  if SHGetMalloc(Allocator) = NOERROR then
+  begin
+    SHGetSpecialFolderLocation(AHandle
+      , CSIDL_PERSONAL, SpecialDir);
+    SHGetPathFromIDList(SpecialDir, @FBuf[0]);
+    Allocator.Free(SpecialDir);
+    result := string(FBuf);
+  end;
+end;
+
+
+
+
+function UruchamiajProgramy(APlikExe: string; AParametry: string = ''; ASciezkaDomyslna: string = ''; APoprzezProces: Boolean = False; ACzekajNaKoniec: Boolean = True; AChowajZrodlo: Boolean = True): Integer;
+var STARTUPINFO: TStartupInfo;
+  ProcessInfo: TProcessInformation;
+begin
+  Result:=0;
+  case APoprzezProces of
+    False: Result := ShellExecute(0, 'open', PChar(APlikExe), PChar(AParametry), PChar(ASciezkaDomyslna), SW_SHOW);
+    True: begin
+        FillChar(STARTUPINFO, SizeOf(TStartupInfo), #0);
+        STARTUPINFO.cb := SizeOf(STARTUPINFO);
+        if AChowajZrodlo then begin
+          with Application do begin
+            Minimize;
+            ShowWindow(Handle, SW_HIDE);
+          end;
+        end;
+        Result := Integer(CreateProcess(nil, PChar(APlikExe + ' ' + AParametry), nil, nil, False, 0, nil, PChar(ExtractFilePath(ASciezkaDomyslna)), StartupInfo, ProcessInfo));
+        if Result <> 0 then begin
+          if ACzekajNaKoniec then WaitForSingleObject(ProcessInfo.hProcess, INFINITE);
+        end else begin
+          ShowMessage(SysErrorMessage(GetLastError));
+        end;
+        if AChowajZrodlo then begin
+          with Application do begin
+            ShowWindow(Handle, SW_SHOW);
+            Restore;
+          end;
+        end;
+      end;
+  end;
+end;
+
+
 end.
 

@@ -1,9 +1,10 @@
 object From_AddEdit: TFrom_AddEdit
   Left = 192
   Top = 107
-  Width = 870
-  Height = 581
+  BorderStyle = bsSingle
   Caption = 'Dane do wydruku ZUS 3'
+  ClientHeight = 560
+  ClientWidth = 861
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +12,7 @@ object From_AddEdit: TFrom_AddEdit
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label_NIP: TLabel
@@ -266,10 +268,11 @@ object From_AddEdit: TFrom_AddEdit
     TabOrder = 7
   end
   object Memo_Pomoc1: TMemo
-    Left = 685
+    Left = 690
     Top = 7
     Width = 166
     Height = 153
+    TabStop = False
     Color = clBtnFace
     Lines.Strings = (
       '(1) Nale'#380'y wpisa'#263' numery NIP i '
@@ -280,6 +283,7 @@ object From_AddEdit: TFrom_AddEdit
       'osobistego albo innego '
       'dokumentu potwierdzaj'#261'cego '
       'to'#380'samo'#347#263'.')
+    ReadOnly = True
     TabOrder = 8
   end
   object MaskEdit_AKodPocztowy: TMaskEdit
@@ -482,10 +486,11 @@ object From_AddEdit: TFrom_AddEdit
     TabOrder = 30
   end
   object MemoPomoc2: TMemo
-    Left = 688
+    Left = 690
     Top = 184
     Width = 169
     Height = 193
+    TabStop = False
     Color = clBtnFace
     Lines.Strings = (
       '(1) Podanie numeru telefonu i '
@@ -496,13 +501,15 @@ object From_AddEdit: TFrom_AddEdit
       '(3) Podanie symbolu pa'#324'stwa nie '
       'jest konieczne, je'#380'eli wniosek jest '
       'zg'#322'aszany w formie papierowej.')
+    ReadOnly = True
     TabOrder = 31
   end
   object MemoPOmoc3: TMemo
-    Left = 693
-    Top = 361
+    Left = 690
+    Top = 400
     Width = 169
-    Height = 193
+    Height = 138
+    TabStop = False
     Color = clBtnFace
     Lines.Strings = (
       '(1) Nale'#380'y wpisa'#263' numer PESEL, '
@@ -511,6 +518,7 @@ object From_AddEdit: TFrom_AddEdit
       'dowodu osobistego albo innego '
       'dokumentu potwierdzaj'#261'cego'
       'to'#380'samo'#347#263)
+    ReadOnly = True
     TabOrder = 32
   end
 end

@@ -8,10 +8,10 @@ uses
   Stale in 'Wspolne\Stale.pas',
   Zmienne in 'Wspolne\Zmienne.pas',
   ObslugaKomponentow in 'Wspolne\ObslugaKomponentow.pas',
-  Forma_Settings in 'Formatki\Forma_Settings.pas' {Form_Settings},
   DMPrint in 'Formatki\DMPrint.pas' {DataModuleReport: TDataModule},
   WydrukZUS3 in 'Wydruki\WydrukZUS3.pas',
-  Froma_AddEdit in 'Formatki\Froma_AddEdit.pas' {From_AddEdit};
+  Froma_AddEdit in 'Formatki\Froma_AddEdit.pas' {From_AddEdit},
+  Forma_Files in 'Formatki\Forma_Files.pas' {Form_Files};
 
 {$R *.res}
 
@@ -20,10 +20,13 @@ begin
   GDataBase := TDataBase.Create;
   GKomunikat := TKomunikat.Create;
   GDataModuleReport := TDataModuleReport.Create(nil);
-  if GDataBase.StartDataBase('') then begin
-    Application.CreateForm(TForm_Main, Form_Main);
-  Application.CreateForm(TFrom_AddEdit, From_AddEdit);
-  Application.Run;
+  if GdataBase.InicjujKatalogEksportowy then begin
+    if GDataBase.StartDataBase('') then begin
+      Application.CreateForm(TForm_Main, Form_Main);
+      Application.Run;
+    end;
+  end else begin
+    GKomunikat.WyswietlKomunikat('Brak katalogu eksportowego. Skontaktuj siê z serwisem aplikacji.', 'Bl¹d');
   end;
   GDataBase.Free;
   GKomunikat.Free;

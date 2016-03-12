@@ -10,12 +10,12 @@ object DataModuleReport: TDataModuleReport
     DataSetName = 'frxDBDataset1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 42436.598467916700000000
-    ReportOptions.LastChange = 42439.800160092600000000
+    ReportOptions.LastChange = 42441.839021030090000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'procedure Memo26OnBeforePrint(Sender: TfrxComponent);'
@@ -715,7 +715,7 @@ object DataModuleReport: TDataModuleReport
         end
       end
       object Child2: TfrxChild
-        Height = 245.669450000000000000
+        Height = 177.637910000000000000
         Top = 801.260360000000000000
         Width = 718.110700000000000000
         object Memo50: TfrxMemoView
@@ -735,7 +735,7 @@ object DataModuleReport: TDataModuleReport
         end
         object Line4: TfrxLineView
           Top = 22.677180000000020000
-          Width = 721.890230000001200000
+          Width = 721.890230000000000000
           ShowHint = False
           Frame.Typ = [ftTop]
         end
@@ -826,7 +826,7 @@ object DataModuleReport: TDataModuleReport
         object Memo58: TfrxMemoView
           Left = 3.779530000000000000
           Top = 94.488250000000000000
-          Width = 566.929499999999900000
+          Width = 566.929500000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -874,7 +874,7 @@ object DataModuleReport: TDataModuleReport
         object Memo62: TfrxMemoView
           Left = 366.614410000000000000
           Top = 136.063080000000000000
-          Width = 238.110390000000000000
+          Width = 204.094620000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -886,10 +886,11 @@ object DataModuleReport: TDataModuleReport
             '[frxDBDataset1."prac_dataUrodzenia"]')
           ParentFont = False
         end
-        object Memo63: TfrxMemoView
-          Top = 170.078850000000000000
-          Width = 642.520100000000000000
-          Height = 18.897650000000000000
+        object Memo65: TfrxMemoView
+          Left = 578.268090000000000000
+          Top = 23.897650000000000000
+          Width = 132.283550000000000000
+          Height = 154.960730000000000000
           ShowHint = False
           Memo.UTF8 = (
             
@@ -899,9 +900,34 @@ object DataModuleReport: TDataModuleReport
             'to'#313#317'samo'#313#8250#196#8225)
         end
       end
+      object PageFooter1: TfrxPageFooter
+        Height = 22.677180000000000000
+        Top = 1039.370750000000000000
+        Width = 718.110700000000000000
+        object Line5: TfrxLineView
+          Width = 721.890230000000000000
+          ShowHint = False
+          Frame.Typ = [ftTop]
+        end
+        object Memo64: TfrxMemoView
+          Left = 672.756340000000000000
+          Width = 94.488250000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = []
+          Memo.UTF8 = (
+            'Strona 1')
+          ParentFont = False
+        end
+      end
     end
   end
   object frxPDFExport: TfrxPDFExport
+    ShowDialog = False
     UseFileCache = True
     ShowProgress = True
     OverwritePrompt = False

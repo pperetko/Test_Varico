@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TfrxReport Version="4.15" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="42436,5984679167" ReportOptions.Description.Text="" ReportOptions.LastChange="42439,8001600926" ScriptLanguage="PascalScript" ScriptText.Text="procedure Memo26OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;   if (trim(&#60;frxDBDataset1.&#34;adres_kodPocztowy&#34;&#62;)&#60;&#62;'') then&#13;&#10;    Memo26.text:= copy(&#60;frxDBDataset1.&#34;adres_kodPocztowy&#34;&#62;,1,2)+'-'+&#13;&#10;    copy(&#60;frxDBDataset1.&#34;adres_kodPocztowy&#34;&#62;,3,5);&#13;&#10;  &#13;&#10;end;&#13;&#10;&#13;&#10;begin&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;end.          " PropData="044C656674022803546F70021008446174617365747301010C3400000020446174615365743D22667278444244617461736574312220446174615365744E616D653D2266727844424461746173657431220000095661726961626C65730100055374796C650100">
+<TfrxReport Version="4.15" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4087" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="42436,5984679167" ReportOptions.Description.Text="" ReportOptions.LastChange="42441,8390210301" ScriptLanguage="PascalScript" ScriptText.Text="procedure Memo26OnBeforePrint(Sender: TfrxComponent);&#13;&#10;begin&#13;&#10;   if (trim(&#60;frxDBDataset1.&#34;adres_kodPocztowy&#34;&#62;)&#60;&#62;'') then&#13;&#10;    Memo26.text:= copy(&#60;frxDBDataset1.&#34;adres_kodPocztowy&#34;&#62;,1,2)+'-'+&#13;&#10;    copy(&#60;frxDBDataset1.&#34;adres_kodPocztowy&#34;&#62;,3,5);&#13;&#10;  &#13;&#10;end;&#13;&#10;&#13;&#10;begin&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;end.          " PropData="044C656674022803546F70021008446174617365747301010C3400000020446174615365743D22667278444244617461736574312220446174615365744E616D653D2266727844424461746173657431220000095661726961626C65730100055374796C650100">
   <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
   <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
     <TfrxReportTitle Name="ReportTitle1" Height="185,19697" Left="0" Top="18,89765" Width="718,1107">
@@ -60,9 +60,9 @@
       <TfrxMemoView Name="Memo48" Left="3,77953" Top="279,68522" Width="483,77984" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="[frxDBDataset1.&#34;adres_email&#34;]"/>
       <TfrxMemoView Name="Memo49" Left="578,26809" Top="37,7953" Width="124,72449" Height="249,44898" ShowHint="False" Text="(1) Podanie numeru telefonu i adresu poczty elektronicznej nie jest obowiązkowe.&#13;&#10;(2) Wypełnić w przypadku, gdy adres jest inny niż polski.&#13;&#10;(3) Podanie symbolu państwa nie jest konieczne, jeżeli wniosek jest zgłaszany w formie papierowej."/>
     </TfrxChild>
-    <TfrxChild Name="Child2" Height="245,66945" Left="0" Top="801,26036" Width="718,1107">
+    <TfrxChild Name="Child2" Height="177,63791" Left="0" Top="801,26036" Width="718,1107">
       <TfrxMemoView Name="Memo50" Left="3,77953" Top="3,77953000000002" Width="215,43321" Height="15,11812" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="DANE IDENTYFIKACYJNE PRACOWNIKA"/>
-      <TfrxLineView Name="Line4" Left="0" Top="22,67718" Width="721,890230000001" Height="0" ShowHint="False" Frame.Typ="4"/>
+      <TfrxLineView Name="Line4" Left="0" Top="22,67718" Width="721,89023" Height="0" ShowHint="False" Frame.Typ="4"/>
       <TfrxMemoView Name="Memo51" Left="3,77953" Top="22,67718" Width="136,06308" Height="18,89765" ShowHint="False" Text="01. Numer PESEL (1)"/>
       <TfrxMemoView Name="Memo52" Left="181,41744" Top="24,23624" Width="154,96073" Height="60,47248" ShowHint="False" Text="02. Rodzaj dokumentu&#13;&#10;tożsamości: jeśli dowód&#13;&#10;osobisty, wpisać 1, jeśli&#13;&#10;inny dokument – 2"/>
       <TfrxMemoView Name="Memo53" Left="381,73253" Top="22,67718" Width="177,63791" Height="18,89765" ShowHint="False" Text="03. Seria i numer dokumentu"/>
@@ -74,8 +74,12 @@
       <TfrxMemoView Name="Memo59" Left="3,77953" Top="117,16543" Width="94,48825" Height="18,89765" ShowHint="False" Text="05. Imię"/>
       <TfrxMemoView Name="Memo60" Left="3,77953" Top="136,06308" Width="355,27582" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="[frxDBDataset1.&#34;prac_imie&#34;]"/>
       <TfrxMemoView Name="Memo61" Left="366,61441" Top="117,16543" Width="204,09462" Height="18,89765" ShowHint="False" Text="06. Data urodzenia (dd/mm/rrrr)"/>
-      <TfrxMemoView Name="Memo62" Left="366,61441" Top="136,06308" Width="238,11039" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="[frxDBDataset1.&#34;prac_dataUrodzenia&#34;]"/>
-      <TfrxMemoView Name="Memo63" Left="0" Top="170,07885" Width="642,5201" Height="18,89765" ShowHint="False" Text="(1) Należy wpisać numer PESEL, a jeżeli nie nadano tego numeru, należy wpisać serię i numer dowodu osobistego albo innego dokumentu potwierdzającego&#13;&#10;tożsamość"/>
+      <TfrxMemoView Name="Memo62" Left="366,61441" Top="136,06308" Width="204,09462" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="[frxDBDataset1.&#34;prac_dataUrodzenia&#34;]"/>
+      <TfrxMemoView Name="Memo65" Left="578,26809" Top="23,89765" Width="132,28355" Height="154,96073" ShowHint="False" Text="(1) Należy wpisać numer PESEL, a jeżeli nie nadano tego numeru, należy wpisać serię i numer dowodu osobistego albo innego dokumentu potwierdzającego&#13;&#10;tożsamość"/>
     </TfrxChild>
+    <TfrxPageFooter Name="PageFooter1" Height="22,67718" Left="0" Top="1039,37075" Width="718,1107">
+      <TfrxLineView Name="Line5" Left="0" Top="0" Width="721,89023" Height="0" ShowHint="False" Frame.Typ="4"/>
+      <TfrxMemoView Name="Memo64" Left="672,75634" Top="0" Width="94,48825" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-11" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="Strona 1"/>
+    </TfrxPageFooter>
   </TfrxReportPage>
 </TfrxReport>
