@@ -21,18 +21,18 @@ object Form_Files: TForm_Files
     Width = 862
     Height = 29
     ButtonHeight = 21
-    ButtonWidth = 56
+    ButtonWidth = 53
     Caption = 'ToolBar'
     ShowCaptions = True
     TabOrder = 0
     object ToolButton_Odswiez: TToolButton
       Left = 0
       Top = 2
-      Caption = '&Odswierz'
+      Caption = '&Odswie'#380
       ImageIndex = 0
     end
     object DateTimePicker: TDateTimePicker
-      Left = 56
+      Left = 53
       Top = 2
       Width = 186
       Height = 21

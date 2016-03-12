@@ -1,7 +1,7 @@
 object DataModuleReport: TDataModuleReport
   OldCreateOrder = False
-  Left = 680
-  Top = 643
+  Left = 154
+  Top = 341
   Height = 274
   Width = 563
   object frxReport: TfrxReport
